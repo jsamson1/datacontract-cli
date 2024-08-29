@@ -1,0 +1,25 @@
+{
+    "ruleSet": {
+      "domainRules": [
+        {
+          "name": "check_correlation_id",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.correlation_id.matches(r\"^\\d{7}$\")",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_user_guid",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.user_guid.matches(r\"^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$\")",
+          "onFailure": "DLQ",
+          "params": {
+            "dlq.topic": "orders-invalid"
+          }
+        }
+      ]
+    }
+  }

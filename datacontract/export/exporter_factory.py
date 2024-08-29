@@ -51,6 +51,10 @@ exporter_factory.register_lazy_exporter(
 )
 
 exporter_factory.register_lazy_exporter(
+    name=ExportFormat.confluent_data_quality, module_path="datacontract.export.confluent_data_quality_converter", class_name="ConfluentDataQualityExporter"
+)
+
+exporter_factory.register_lazy_exporter(
     name=ExportFormat.avro_idl,
     module_path="datacontract.export.avro_idl_converter",
     class_name="AvroIdlExporter",

@@ -1,0 +1,73 @@
+{
+  "ruleSet": {
+    "domainRules": [
+      {
+        "name": "check_id",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.id.isUuid()",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_email",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'email' && typeName == 'STRING' ; value.isEmail()",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_customer_num",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'customer_num' && typeName == 'INT' ; size(value) == 8",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_create_ts",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'create_ts' && typeName == 'LONG' ; size(value) == 13",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_price",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'price' && typeName == 'FLOAT' ; value >= 0.0",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_dewey_decimal_num",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'dewey_decimal_num' && typeName == 'BYTES' ; value.matches(r\"^\\d{1,3}(\\.\\d+)?$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_active_user",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'active_user' && typeName == 'BOOLEAN' ; value == true",
+        "onFailure": "DLQ",
+        "params": {
+          "dlq.topic": "dlq_inactive"
+        }
+      },
+      {
+        "name": "check_binary_encoding",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'binary_encoding' && typeName == 'BYTES' ; value != \"\\u0000\"",
+        "onFailure": "ERROR"
+      }
+    ]
+  }
+}

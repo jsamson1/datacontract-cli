@@ -35,6 +35,7 @@ class ExportFormat(str, Enum):
     bigquery = "bigquery"
     dbml = "dbml"
     spark = "spark"
+    confluent_data_quality = "confluent-data-quality"
 
     @classmethod
     def get_supported_formats(cls):
