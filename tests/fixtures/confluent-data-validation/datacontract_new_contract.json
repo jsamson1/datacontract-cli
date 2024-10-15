@@ -1,0 +1,84 @@
+{
+    "ruleSet": {
+      "domainRules": [
+        {
+          "name": "check_title_pattern",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.title.matches(r\"^.{0,150}$\")",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_title_length",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "size(message.title) >= 1 && size(message.title) <= 150",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_bib_id_precision",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.bib_id < 10^7",
+          "onFailure": "DLQ",
+          "params": {
+            "dlq.topic": "dlq_inactive"
+          }
+        },
+        {
+          "name": "check_bib_id_range",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.bib_id >= 0 && message.bib_id <= 9999999",
+          "onFailure": "DLQ",
+          "params": {
+            "dlq.topic": "dlq_inactive"
+          }
+        },
+        {
+          "name": "check_outbox_ts_range",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.outbox_ts >= 1728313226833",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_event_ts_range",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "name == 'event_ts' && typeName == 'LONG' ; value >= 1728313226833",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_decimal_example_scale",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "string(message.decimal_example).matches(r\"^\\d+\\.\\d{3}$\")",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_decimal_example_precision",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "int(message.decimal_example) < 10^7",
+          "onFailure": "ERROR"
+        },
+        {
+          "name": "check_decimal_example_range",
+          "kind": "CONDITION",
+          "mode": "WRITE",
+          "type": "CEL",
+          "expr": "message.decimal_example >= 0 && message.decimal_example <= 9999999",
+          "onFailure": "ERROR"
+        }
+      ]
+    }
+  }

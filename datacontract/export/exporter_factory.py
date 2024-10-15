@@ -155,3 +155,7 @@ exporter_factory.register_lazy_exporter(
     module_path="datacontract.export.sqlalchemy_converter",
     class_name="SQLAlchemyExporter",
 )
+
+exporter_factory.register_lazy_exporter(
+    name=ExportFormat.confluent_data_validation, module_path="datacontract.export.confluent_data_quality_converter", class_name="ConfluentDataQualityExporter"
+)

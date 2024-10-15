@@ -1,0 +1,130 @@
+dataContractSpecification: 0.9.3
+id: destiny-library-copy
+info:
+  title: Data Contract - Destiny Library Copy
+  version: 0.0.1
+  description: Represents the data contract for Destiny copy records.
+servers:
+  production:
+    type: kafka
+    host: pkc-lgwgm.eastus2.azure.confluent.cloud:9092
+    topic: destiny-library-bib 
+    format: avro
+models:
+  destiny-library-copy:
+    type: table
+    description: Destiny Library Copy
+    namespace: com.follett.schema
+    fields:
+      outbox_ts:
+        type: timestamp
+        description: When a record is added to the Transactional Outbox.
+        required: true
+        example: "1722624031122"
+      event_ts:
+        type: timestamp
+        description: The created or updated TS of the Copy record.
+        required: true
+        example: "1722624031122"
+      district_customer_no:
+        type: string
+        description: The FSC district customer number.
+        pattern: ^\d{7}$
+        minLength: 1
+        maxLength: 7
+        required: true
+        example: "5550100"
+      site_customer_no:
+        type: string
+        description: The FSC site customer number.
+        pattern: ^\d{7}$
+        minLength: 1
+        maxLength: 7
+        required: true
+        example: "8201779"
+      copy_id:
+        type: int
+        description: The unique identifer for the copy.
+        precision: 8
+        required: true
+        example: "1176"
+      bib_id:
+        type: int
+        description: The unique identifer for the title of the copy.
+        precision: 7
+        required: true
+        example: "202"
+      acquired_ts:
+        type: timestamp
+        description: The datetime when this copy was acquired
+        required: false
+        example: "1722624031122"
+      removal_ts:
+        type: timestamp
+        description: Will be set when a book has been deleted or weeded from a collection
+        required: false
+        example: "1722624031122"
+      call_no:
+        type: string
+        description: The call number of the copy.
+        pattern: ^.{0,90}$
+        minLength: 0
+        maxLength: 90
+        required: false
+        example: "R 081 HOM"
+      call_no_prefix:
+        type: string
+        description: The call number prefix of the copy.
+        pattern: ^.{0,30}$
+        minLength: 0
+        maxLength: 30
+        required: false
+        example: "R"
+      dewey_no:
+        type: string
+        description: The dewey number of the copy.
+        pattern: ^.{0,20}$
+        minLength: 0
+        maxLength: 20
+        required: false
+        example: "81.00000000000000000"
+      price:
+        type: string
+        description: The price of the copy in a customer's local format as determined by CurrencyUnit minor unit.
+        pattern: ^.{0,17}$
+        minLength: 0
+        maxLength: 17
+        required: false
+        example: "10.00"
+      currency_code:
+        type: string
+        description: The currency code for the district.
+        pattern: ^.{0,3}$
+        minLength: 0
+        maxLength: 3
+        required: false
+        example: "USD"
+      funding_source:
+        type: string
+        description: The funding source of the copy.
+        pattern: ^.{0,30}$
+        minLength: 0
+        maxLength: 30
+        required: false
+        example: "Libary Grant 1999"
+      sublocation:
+        type: string
+        description: The sublocation of the copy.
+        pattern: ^.{0,50}$
+        minLength: 0
+        maxLength: 50
+        required: false
+        example: "Biography"
+      barcode:
+        type: string
+        description: The barcode of the copy.
+        pattern: ^.{0,50}$
+        minLength: 0
+        maxLength: 50
+        required: false
+        example: "B001100001527S"

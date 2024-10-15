@@ -1,0 +1,48 @@
+dataContractSpecification: 0.9.3
+id: urn:datacontract:checkout:orders-latest
+info:
+  title: Orders Latest
+  version: 1.0.0
+models:
+  orders:
+    description: One record per order. Includes cancelled and deleted orders.
+    type: object
+    fields:
+      title:
+        type: string
+        description: The title of the bibliographic record.
+        pattern: ^.{0,150}$
+        minLength: 1 
+        maxLength: 150     
+        required: true         
+      bib_id:
+        type: int
+        description: The unique identifer for a bibliographic record within a district.
+        precision: 7       
+        minimum: 0              
+        maximum: 9999999        
+        required: true          
+        config:
+          dq_dlq_topic: dlq_inactive
+      outbox_ts:
+        type: timestamp
+        description: When a record is added to the Transactional Outbox.
+        minimum: 1728313226833
+        required: true
+        example: "1722624031122"
+      event_ts:
+        type: timestamp
+        description: When a record is created.
+        minimum: 1728313226833
+        required: true
+        example: "1722624031122"
+      decimal_example:  
+        type: float
+        description: This is an example of a decimal field.
+        scale: 3
+        precision: 7
+        minimum: 0
+        maximum: 9999999
+        required: false
+        example: "172.321"
+      

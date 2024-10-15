@@ -1,0 +1,238 @@
+dataContractSpecification: 0.9.3
+id: destiny-library-bib
+info:
+  title: Data Contract - Destiny Library Bib
+  version: 0.0.1
+  description: Represents the data contract for Destiny bib records.
+servers:
+  production:
+    type: kafka
+    host: pkc-lgwgm.eastus2.azure.confluent.cloud:9092
+    topic: destiny-library-bib 
+    format: avro
+models:
+  destiny-library-bib:
+    type: table
+    description: Destiny Library Bib
+    namespace: com.follett.schema
+    fields:
+      outbox_ts:
+        type: timestamp
+        description: When a record is added to the Transactional Outbox.
+        required: true
+        example: "1722624031122"
+      event_ts:
+        type: timestamp
+        description: The created or updated TS of the BibMaster record.
+        required: true
+        example: "1722624031122"
+      district_customer_no:
+        type: string
+        description: The FSC district customer number.
+        pattern: ^\d{7}$
+        minLength: 1
+        maxLength: 7
+        required: true
+        example: "5550100"
+      bib_id:
+        type: int
+        description: The unique identifer for a bibliographic record within a district.
+        precision: 7
+        required: true
+        example: "202"
+      title:
+        type: string
+        description: The title of the bibliographic record.
+        pattern: ^.{0,150}$
+        minLength: 1
+        maxLength: 150
+        required: true
+        example: The Call of the Wild
+      title_sorted:
+        type: string
+        description: The sortable title value.
+        pattern: ^.{0,150}$
+        minLength: 1
+        maxLength: 150
+        required: true
+        example: CALL OF THE WILD
+      author:
+        type: string
+        description: The author of the title.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: Jack London
+      author_sorted:
+        type: string
+        description: The sortable author value.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: JACK LONDON
+      publisher:
+        type: string
+        description: The publisher of the title.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: Perma-Bound
+      publisher_sorted:
+        type: string
+        description: The sortable publisher value.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: PERMA BOUND
+      material_type:
+        type: string
+        description: The material type of the title.
+        pattern: ^.{0,50}$
+        minLength: 1
+        maxLength: 50
+        required: true
+        example: Book
+      material_sub_type:
+        type: string
+        description: The material subtype of the title.
+        pattern: ^.{0,50}$
+        minLength: 0
+        maxLength: 50
+        required: false
+        example: Hardcover
+      resold_host:
+        type: string
+        description: For a resold title, this indicates the host.
+        pattern: ^.{0,50}$
+        minLength: 0
+        maxLength: 50
+        required: false
+        example: Lightbox
+      is_physical:
+        type: boolean
+        description: Indicates if the title is physical or not.
+        required: false
+        example: "1"
+      fiction:
+        type: string
+        description: Indicates if the title is fiction or not.
+        title: Fiction
+        enum:
+        - Fiction
+        - Non-Fiction
+        - Other
+        config:
+          avroType: enum
+        pattern: ^.{0,40}$
+        minLength: 0
+        maxLength: 40
+        required: false
+        example: "Fiction"
+      kts_id:
+        type: int
+        description: A unique identifier for a digital title.
+        precision: 9
+        minLength: 0
+        maxLength: 9
+        required: false
+        example: "9638"
+      resold_id: 
+        type: string
+        description: A unique identifier for a digital, resold title.
+        pattern: ^.{0,24}$
+        minLength: 0
+        maxLength: 27
+        required: false
+        example: "500QEA"
+      flr_id:
+        type: string
+        description: This represents the FlrIdFromMarc.
+        pattern: ^.{0,40}$
+        minLength: 0
+        maxLength: 40
+        required: false
+        example: "50313M"
+      isbn:
+        type: string
+        description: The ISBN of the title.
+        pattern: ^.{0,20}$
+        minLength: 0
+        maxLength: 20
+        required: false
+        example: "0152712461"
+      isbns:
+        type: array
+        items:
+          type: string
+        description: An array of available ISBNs for the title.
+        pattern: ^\[\".*?\"(, ?\".*?\")*\]$
+        minLength: 0
+        maxLength: 140
+        required: false
+        example: "['0152712461', '0758735901', '0152712453', '032913292X', '9780152712457', '9780152712464', '9780758735904', '9780329132927']"
+      lccn:
+        type: string
+        description: The library of Congress control number (LCCN) without leading text.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: "74-001513"
+      edition:
+        type: string
+        description: The edition of the title.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: "1st Tor ed."
+      series:
+        type: string
+        description: The series of the title.
+        pattern: ^.{0,150}$
+        minLength: 0
+        maxLength: 150
+        required: false
+        example: "California Wildflower Books"
+      publication_year:
+        type: int
+        description: The publication year of the title.
+        precision: 4
+        required: false
+        example: "1988"
+      language:
+        type: string
+        description: The language of the title.
+        pattern: ^.{0,50}$
+        minLength: 0
+        maxLength: 50
+        required: false
+        example: "English"
+      summary:
+        type: string
+        description: The summary of the title.
+        pattern: ^.{0,125}$
+        minLength: 0
+        maxLength: 125
+        required: false
+        example: "The journal of a 14-year-old girl, kept the last year she lived on the family farm, records daily events in her small New..."
+      audience:
+        type: string
+        description: The intended audience of the title.
+        pattern: ^.{0,20}$
+        minLength: 0
+        maxLength: 20
+        required: false
+        example: "K-3"
+      reading_grade_level:
+        type: string
+        description: The reading grade level of the title.
+        pattern: ^.{0,3}$
+        minLength: 0
+        maxLength: 3
+        required: false
+        example: "6.0"

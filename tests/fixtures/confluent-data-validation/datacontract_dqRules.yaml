@@ -1,0 +1,23 @@
+dataContractSpecification: 0.9.3
+id: urn:datacontract:checkout:orders-latest
+info:
+  title: Orders Latest
+  version: 1.0.0
+models:
+  orders:
+    description: One record per order. Includes cancelled and deleted orders.
+    type: object
+    fields:
+      event_ts:
+        type: timestamp_ntz
+      correlation_id:
+        type: string
+        required: true
+        config:
+          dq_rule: message.correlation_id.matches(r"^\d{7}$")
+      user_guid:
+        type: string
+        required: true
+        config:
+          dq_rule: message.user_guid.matches(r"^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+          dq_dlq_topic: orders-invalid

@@ -1,0 +1,85 @@
+dataContractSpecification: 0.9.3
+id: destiny-library-copy-status
+info:
+  title: Data Contract - Destiny Library Copy Status
+  version: 0.0.1
+  description: Represents the data contract for Destiny copy status records.
+servers:
+  production:
+    type: kafka
+    host: pkc-lgwgm.eastus2.azure.confluent.cloud:9092
+    topic: destiny-library-bib 
+    format: avro
+models:
+  destiny-library-copy-status:
+    type: table
+    description: Destiny Library Copy Status
+    namespace: com.follett.schema
+    fields:
+      outbox_ts:
+        type: timestamp
+        description: When a record is added to the Transactional Outbox.
+        required: true
+        example: "1722624031122"
+      event_ts:
+        type: timestamp
+        description: When the Copy record updates its status.
+        required: true
+        example: "1722624031122"
+      district_customer_no:
+        type: string
+        description: The FSC district customer number.
+        pattern: ^\d{7}$
+        minLength: 1
+        maxLength: 7
+        required: true
+        example: "5550100"
+      site_customer_no:
+        type: string
+        description: The FSC site customer number.
+        pattern: ^\d{7}$
+        minLength: 1
+        maxLength: 7
+        required: true
+        example: "8201779"
+      copy_id:
+        type: int
+        description: The unique identifer for the copy.
+        precision: 8
+        required: true
+        example: "1176"
+      bib_id:
+        type: int
+        description: The unique identifer for the title of the copy.
+        precision: 7
+        required: true
+        example: "202"
+      status:
+        type: string
+        description: The current status ID of the copy
+        title: CopyStatus
+        enum:
+        - "0"
+        - "100"
+        - "101"
+        - "102"
+        - "103"
+        - "104"
+        - "105"
+        - "106"
+        - "107"
+        - "110"
+        - "111"
+        - "112"
+        - "200"
+        - "201"
+        - "202"
+        - "203"
+        - "204"
+        - "205"
+        - "206"
+        - "250"
+        config:
+          avroType: enum
+        required: true
+        example: "101"

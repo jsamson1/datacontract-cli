@@ -1,0 +1,54 @@
+{
+  "ruleSet": {
+    "domainRules": [
+      {
+        "name": "check_district_customer_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.district_customer_no.matches(r\"^\\d{7}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_district_customer_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.district_customer_no) >= 1 && size(message.district_customer_no) <= 7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_site_customer_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.site_customer_no.matches(r\"^\\d{7}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_site_customer_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.site_customer_no) >= 1 && size(message.site_customer_no) <= 7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_copy_id_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.copy_id < 10^8",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_bib_id_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.bib_id < 10^7",
+        "onFailure": "ERROR"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+dataContractSpecification: 0.9.3
+id: destiny-library-bib
+info:
+  title: Data Contract - Destiny Library Bib
+  version: 0.0.1
+  description: Represents the data contract for Destiny bib records.
+servers:
+  production:
+    type: kafka
+    host: pkc-lgwgm.eastus2.azure.confluent.cloud:9092
+    topic: destiny-library-bib 
+    format: avro
+models:
+  destiny-library-bib:
+    type: table
+    description: Destiny Library Bib
+    namespace: com.follett.schema
+    fields:
+      district_customer_no:
+        type: string
+        description: District Customer Num
+        required: false
+        pattern: ^\d{7}$
+        minLength: 1
+        maxLength: 7
+        example: "1722624031122"
+      bib_id:
+        type: int
+        description: Bib ID
+        required: true
+        precision: 6
+        minimum: 0
+        maximum: 999999
+      price_decimal:
+        type: double
+        required: false
+        precision: 7
+        scale: 2
+      acquired_dt:
+        type: timestamp
+        description: Timestamp
+        required: true
+        minimum: 1722624031122
+      
+      

@@ -1,0 +1,366 @@
+{
+  "ruleSet": {
+    "domainRules": [
+      {
+        "name": "check_district_customer_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.district_customer_no.matches(r\"^\\d{7}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_district_customer_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.district_customer_no) >= 1 && size(message.district_customer_no) <= 7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_bib_id_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.bib_id < 10^7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_title_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.title.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_title_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.title) >= 1 && size(message.title) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_title_sorted_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.title_sorted.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_title_sorted_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.title_sorted) >= 1 && size(message.title_sorted) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_author_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'author' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_author_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'author' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_author_sorted_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'author_sorted' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_author_sorted_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'author_sorted' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_publisher_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'publisher' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_publisher_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'publisher' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_publisher_sorted_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'publisher_sorted' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_publisher_sorted_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'publisher_sorted' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_material_type_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.material_type.matches(r\"^.{0,50}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_material_type_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.material_type) >= 1 && size(message.material_type) <= 50",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_material_sub_type_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'material_sub_type' && typeName == 'STRING' ; value.matches(r\"^.{0,50}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_material_sub_type_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'material_sub_type' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 50",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_resold_host_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'resold_host' && typeName == 'STRING' ; value.matches(r\"^.{0,50}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_resold_host_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'resold_host' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 50",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_fiction_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'fiction' && typeName == 'STRING' ; value.matches(r\"^.{0,40}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_fiction_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'fiction' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 40",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_kts_id_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'kts_id' && typeName == 'INT' ; value < 10^9",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_resold_id_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'resold_id' && typeName == 'STRING' ; value.matches(r\"^.{0,24}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_resold_id_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'resold_id' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 27",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_flr_id_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'flr_id' && typeName == 'STRING' ; value.matches(r\"^.{0,40}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_flr_id_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'flr_id' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 40",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_isbn_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'isbn' && typeName == 'STRING' ; value.matches(r\"^.{0,20}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_isbn_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'isbn' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 20",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_lccn_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'lccn' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_lccn_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'lccn' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_edition_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'edition' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_edition_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'edition' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_series_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'series' && typeName == 'STRING' ; value.matches(r\"^.{0,150}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_series_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'series' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 150",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_publication_year_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'publication_year' && typeName == 'INT' ; value < 10^4",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_language_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'language' && typeName == 'STRING' ; value.matches(r\"^.{0,50}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_language_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'language' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 50",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_summary_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'summary' && typeName == 'STRING' ; value.matches(r\"^.{0,125}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_summary_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'summary' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 125",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_audience_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'audience' && typeName == 'STRING' ; value.matches(r\"^.{0,20}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_audience_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'audience' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 20",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_reading_grade_level_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'reading_grade_level' && typeName == 'STRING' ; value.matches(r\"^.{0,3}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_reading_grade_level_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'reading_grade_level' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 3",
+        "onFailure": "ERROR"
+      }
+    ]
+  }
+}

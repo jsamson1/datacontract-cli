@@ -1,0 +1,51 @@
+dataContractSpecification: 0.9.3
+id: urn:datacontract:checkout:orders-latest
+info:
+  title: Orders Latest
+  version: 1.0.0
+models:
+  orders:
+    description: One record per order. Includes cancelled and deleted orders.
+    type: object
+    fields:
+      id:
+        type: string
+        required: true
+        config:
+          dq_rule: message.id.isUuid()
+      email:
+        type: string
+        required: false
+        config:
+          dq_rule: value.isEmail()
+      customer_num:
+        type: integer
+        required: false
+        config:
+          dq_rule: size(value) == 8
+      create_ts:
+        type: timestamp
+        required: false
+        config:
+          dq_rule: size(value) == 13
+      price:
+        type: float
+        required: false
+        config:
+          dq_rule: value >= 0.0
+      dewey_decimal_num:
+        type: decimal
+        required: false
+        config:
+          dq_rule: value.matches(r"^\d{1,3}(\.\d+)?$")
+      active_user:
+        type: boolean
+        required: false
+        config:
+          dq_rule: value == true
+          dq_dlq_topic: dlq_inactive
+      binary_encoding:
+        type: bytes
+        required: false
+        config:
+          dq_rule: value != "\u0000"

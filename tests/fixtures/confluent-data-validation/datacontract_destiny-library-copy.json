@@ -1,0 +1,182 @@
+{
+  "ruleSet": {
+    "domainRules": [
+      {
+        "name": "check_district_customer_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.district_customer_no.matches(r\"^\\d{7}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_district_customer_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.district_customer_no) >= 1 && size(message.district_customer_no) <= 7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_site_customer_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.site_customer_no.matches(r\"^\\d{7}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_site_customer_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "size(message.site_customer_no) >= 1 && size(message.site_customer_no) <= 7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_copy_id_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.copy_id < 10^8",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_bib_id_precision",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL",
+        "expr": "message.bib_id < 10^7",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_call_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'call_no' && typeName == 'STRING' ; value.matches(r\"^.{0,90}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_call_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'call_no' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 90",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_call_no_prefix_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'call_no_prefix' && typeName == 'STRING' ; value.matches(r\"^.{0,30}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_call_no_prefix_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'call_no_prefix' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 30",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_dewey_no_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'dewey_no' && typeName == 'STRING' ; value.matches(r\"^.{0,20}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_dewey_no_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'dewey_no' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 20",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_price_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'price' && typeName == 'STRING' ; value.matches(r\"^.{0,17}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_price_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'price' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 17",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_currency_code_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'currency_code' && typeName == 'STRING' ; value.matches(r\"^.{0,3}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_currency_code_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'currency_code' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 3",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_funding_source_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'funding_source' && typeName == 'STRING' ; value.matches(r\"^.{0,30}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_funding_source_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'funding_source' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 30",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_sublocation_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'sublocation' && typeName == 'STRING' ; value.matches(r\"^.{0,50}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_sublocation_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'sublocation' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 50",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_barcode_pattern",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'barcode' && typeName == 'STRING' ; value.matches(r\"^.{0,50}$\")",
+        "onFailure": "ERROR"
+      },
+      {
+        "name": "check_barcode_length",
+        "kind": "CONDITION",
+        "mode": "WRITE",
+        "type": "CEL_FIELD",
+        "expr": "name == 'barcode' && typeName == 'STRING' ; size(value) >= 0 && size(value) <= 50",
+        "onFailure": "ERROR"
+      }
+    ]
+  }
+}

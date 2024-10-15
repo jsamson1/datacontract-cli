@@ -37,6 +37,7 @@ class ExportFormat(str, Enum):
     spark = "spark"
     sqlalchemy = "sqlalchemy"
     data_caterer = "data-caterer"
+    confluent_data_validation = "confluent-data-validation"
 
     @classmethod
     def get_supported_formats(cls):
